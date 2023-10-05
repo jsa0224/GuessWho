@@ -25,6 +25,11 @@
 		AE5759352ACEE04100E8EF51 /* RxTest in Frameworks */ = {isa = PBXBuildFile; productRef = AE5759342ACEE04100E8EF51 /* RxTest */; };
 		AE5759372ACEE04100E8EF51 /* RxTest-Dynamic in Frameworks */ = {isa = PBXBuildFile; productRef = AE5759362ACEE04100E8EF51 /* RxTest-Dynamic */; };
 		AED6820A2ACEE10200898386 /* GuessWhoUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = AED682092ACEE10200898386 /* GuessWhoUseCase.swift */; };
+		AED6820D2ACEE18D00898386 /* CelebrityData.swift in Sources */ = {isa = PBXBuildFile; fileRef = AED6820C2ACEE18D00898386 /* CelebrityData.swift */; };
+		AED682102ACEE2DF00898386 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AED6820F2ACEE2DF00898386 /* DataManager.swift */; };
+		AED682132ACEE32300898386 /* DataRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = AED682122ACEE32300898386 /* DataRepository.swift */; };
+		AED682162ACEE57D00898386 /* DataError.swift in Sources */ = {isa = PBXBuildFile; fileRef = AED682152ACEE57D00898386 /* DataError.swift */; };
+		AED682192ACEE60800898386 /* GuessWhoRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = AED682182ACEE60800898386 /* GuessWhoRepository.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,6 +43,11 @@
 		78793A5A2ACEC3C600B80163 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AE57591E2ACEDE6300E8EF51 /* Celebrity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Celebrity.swift; sourceTree = "<group>"; };
 		AED682092ACEE10200898386 /* GuessWhoUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuessWhoUseCase.swift; sourceTree = "<group>"; };
+		AED6820C2ACEE18D00898386 /* CelebrityData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CelebrityData.swift; sourceTree = "<group>"; };
+		AED6820F2ACEE2DF00898386 /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
+		AED682122ACEE32300898386 /* DataRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataRepository.swift; sourceTree = "<group>"; };
+		AED682152ACEE57D00898386 /* DataError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataError.swift; sourceTree = "<group>"; };
+		AED682182ACEE60800898386 /* GuessWhoRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuessWhoRepository.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -80,6 +90,7 @@
 		78793A4B2ACEC3C200B80163 /* GuessWho */ = {
 			isa = PBXGroup;
 			children = (
+				AED6820B2ACEE16700898386 /* Data */,
 				AE57591C2ACEDE1200E8EF51 /* Domain */,
 				78793A4C2ACEC3C200B80163 /* AppDelegate.swift */,
 				78793A4E2ACEC3C200B80163 /* SceneDelegate.swift */,
@@ -95,8 +106,9 @@
 		AE57591C2ACEDE1200E8EF51 /* Domain */ = {
 			isa = PBXGroup;
 			children = (
-				AED682082ACEE0ED00898386 /* UseCases */,
 				AE57591D2ACEDE3700E8EF51 /* Entities */,
+				AED682082ACEE0ED00898386 /* UseCases */,
+				AED682142ACEE37000898386 /* Interfaces */,
 			);
 			path = Domain;
 			sourceTree = "<group>";
@@ -115,6 +127,49 @@
 				AED682092ACEE10200898386 /* GuessWhoUseCase.swift */,
 			);
 			path = UseCases;
+			sourceTree = "<group>";
+		};
+		AED6820B2ACEE16700898386 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				AED6820C2ACEE18D00898386 /* CelebrityData.swift */,
+				AED682172ACEE5E600898386 /* Repositories */,
+				AED6820E2ACEE2C500898386 /* Manager */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
+		AED6820E2ACEE2C500898386 /* Manager */ = {
+			isa = PBXGroup;
+			children = (
+				AED6820F2ACEE2DF00898386 /* DataManager.swift */,
+				AED682152ACEE57D00898386 /* DataError.swift */,
+			);
+			path = Manager;
+			sourceTree = "<group>";
+		};
+		AED682112ACEE30300898386 /* Repositories */ = {
+			isa = PBXGroup;
+			children = (
+				AED682122ACEE32300898386 /* DataRepository.swift */,
+			);
+			path = Repositories;
+			sourceTree = "<group>";
+		};
+		AED682142ACEE37000898386 /* Interfaces */ = {
+			isa = PBXGroup;
+			children = (
+				AED682112ACEE30300898386 /* Repositories */,
+			);
+			path = Interfaces;
+			sourceTree = "<group>";
+		};
+		AED682172ACEE5E600898386 /* Repositories */ = {
+			isa = PBXGroup;
+			children = (
+				AED682182ACEE60800898386 /* GuessWhoRepository.swift */,
+			);
+			path = Repositories;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -204,10 +259,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				78793A512ACEC3C200B80163 /* ViewController.swift in Sources */,
+				AED682132ACEE32300898386 /* DataRepository.swift in Sources */,
 				AED6820A2ACEE10200898386 /* GuessWhoUseCase.swift in Sources */,
 				AE57591F2ACEDE6300E8EF51 /* Celebrity.swift in Sources */,
+				AED682102ACEE2DF00898386 /* DataManager.swift in Sources */,
 				78793A4D2ACEC3C200B80163 /* AppDelegate.swift in Sources */,
+				AED682192ACEE60800898386 /* GuessWhoRepository.swift in Sources */,
+				AED682162ACEE57D00898386 /* DataError.swift in Sources */,
 				78793A4F2ACEC3C200B80163 /* SceneDelegate.swift in Sources */,
+				AED6820D2ACEE18D00898386 /* CelebrityData.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
