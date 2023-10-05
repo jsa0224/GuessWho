@@ -17,14 +17,20 @@ final class DataManager {
 
     func fetchGameList(by occupation: Occupation) -> Observable<[Celebrity]> {
         return Observable.create { [weak self] emitter in
-            guard let request = self?.data.celebrities
-                .filter({ $0.occupation == occupation })
-            else {
-                emitter.onError(DataError.readFail)
-                return Disposables.create()
+            var result: [Celebrity] = []
+
+            for _ in 1...5 {
+                guard let request = self?.data.celebrities
+                    .filter({ $0.occupation == occupation })
+                else {
+                    emitter.onError(DataError.readFail)
+                    return Disposables.create()
+                }
+
+                result.append(contentsOf: request)
             }
 
-            emitter.onNext(request)
+            emitter.onNext(result)
             emitter.onCompleted()
 
             return Disposables.create()
