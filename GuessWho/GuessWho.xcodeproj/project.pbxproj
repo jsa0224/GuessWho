@@ -13,6 +13,9 @@
 		78793A542ACEC3C200B80163 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 78793A522ACEC3C200B80163 /* Main.storyboard */; };
 		78793A562ACEC3C600B80163 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 78793A552ACEC3C600B80163 /* Assets.xcassets */; };
 		78793A592ACEC3C600B80163 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 78793A572ACEC3C600B80163 /* LaunchScreen.storyboard */; };
+		78793A612ACEE84C00B80163 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78793A602ACEE84C00B80163 /* MainView.swift */; };
+		78793A632ACEEA3A00B80163 /* CategoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78793A622ACEEA3A00B80163 /* CategoryView.swift */; };
+		78793A652ACEEEDC00B80163 /* QuizView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78793A642ACEEEDC00B80163 /* QuizView.swift */; };
 		AE57591F2ACEDE6300E8EF51 /* Celebrity.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE57591E2ACEDE6300E8EF51 /* Celebrity.swift */; };
 		AE5759252ACEE04100E8EF51 /* RxBlocking in Frameworks */ = {isa = PBXBuildFile; productRef = AE5759242ACEE04100E8EF51 /* RxBlocking */; };
 		AE5759272ACEE04100E8EF51 /* RxBlocking-Dynamic in Frameworks */ = {isa = PBXBuildFile; productRef = AE5759262ACEE04100E8EF51 /* RxBlocking-Dynamic */; };
@@ -41,6 +44,9 @@
 		78793A552ACEC3C600B80163 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		78793A582ACEC3C600B80163 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		78793A5A2ACEC3C600B80163 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		78793A602ACEE84C00B80163 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
+		78793A622ACEEA3A00B80163 /* CategoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryView.swift; sourceTree = "<group>"; };
+		78793A642ACEEEDC00B80163 /* QuizView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizView.swift; sourceTree = "<group>"; };
 		AE57591E2ACEDE6300E8EF51 /* Celebrity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Celebrity.swift; sourceTree = "<group>"; };
 		AED682092ACEE10200898386 /* GuessWhoUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuessWhoUseCase.swift; sourceTree = "<group>"; };
 		AED6820C2ACEE18D00898386 /* CelebrityData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CelebrityData.swift; sourceTree = "<group>"; };
@@ -95,6 +101,9 @@
 				78793A4C2ACEC3C200B80163 /* AppDelegate.swift */,
 				78793A4E2ACEC3C200B80163 /* SceneDelegate.swift */,
 				78793A502ACEC3C200B80163 /* ViewController.swift */,
+				78793A642ACEEEDC00B80163 /* QuizView.swift */,
+				78793A622ACEEA3A00B80163 /* CategoryView.swift */,
+				78793A602ACEE84C00B80163 /* MainView.swift */,
 				78793A522ACEC3C200B80163 /* Main.storyboard */,
 				78793A552ACEC3C600B80163 /* Assets.xcassets */,
 				78793A572ACEC3C600B80163 /* LaunchScreen.storyboard */,
@@ -259,6 +268,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				78793A512ACEC3C200B80163 /* ViewController.swift in Sources */,
+				78793A612ACEE84C00B80163 /* MainView.swift in Sources */,
 				AED682132ACEE32300898386 /* DataRepository.swift in Sources */,
 				AED6820A2ACEE10200898386 /* GuessWhoUseCase.swift in Sources */,
 				AE57591F2ACEDE6300E8EF51 /* Celebrity.swift in Sources */,
@@ -267,6 +277,8 @@
 				AED682192ACEE60800898386 /* GuessWhoRepository.swift in Sources */,
 				AED682162ACEE57D00898386 /* DataError.swift in Sources */,
 				78793A4F2ACEC3C200B80163 /* SceneDelegate.swift in Sources */,
+				78793A632ACEEA3A00B80163 /* CategoryView.swift in Sources */,
+				78793A652ACEEEDC00B80163 /* QuizView.swift in Sources */,
 				AED6820D2ACEE18D00898386 /* CelebrityData.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

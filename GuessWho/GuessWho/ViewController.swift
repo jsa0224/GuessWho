@@ -8,12 +8,21 @@
 import UIKit
 
 class ViewController: UIViewController {
+    private let mainView = MainView()
+    private let categoryView = CategoryView()
+    private let quizView = QuizView()
 
+    override func loadView() {
+        super.loadView()
+        view = mainView
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
     }
-
-
+    
+    func configureAction() {
+        
+    }
 }
 
