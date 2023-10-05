@@ -13,7 +13,13 @@ protocol GuessWhoUseCase {
 }
 
 final class DefaultGuessWhoUseCase: GuessWhoUseCase {
-    func fetchGameList(by occupation: Occupation) -> RxSwift.Observable<[Celebrity]> {
-        <#code#>
+    private let guessWhoRepository: GuessWhoRepository
+
+    init(guessWhoRepository: GuessWhoRepository) {
+        self.guessWhoRepository = guessWhoRepository
+    }
+
+    func fetchGameList(by occupation: Occupation) -> Observable<[Celebrity]> {
+        return guessWhoRepository.fetchGameList(by: occupation)
     }
 }
