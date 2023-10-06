@@ -58,6 +58,7 @@ class ViewController: UIViewController {
             .withUnretained(self)
             .bind(onNext: { owner, game in
                 owner.timer?.invalidate()
+                owner.quizView.timerLabel.text = " "
                 owner.quizView.configureView(by: game)
                 owner.timer = Timer.scheduledTimer(timeInterval: 1.0,
                                              target: self,
@@ -81,11 +82,13 @@ class ViewController: UIViewController {
                 guard let isValid = owner.timer?.isValid else { return }
                 if bool && isValid {
                     owner.quizView.answerTextField.text = nil
+                    owner.quizView.timerLabel.text = " "
                     owner.currentCount = 7
                     owner.isCorrectRelay.accept(true)
                 } else {
                     owner.quizView.answerTextField.text = nil
-                    owner.currentCount = 7
+                    owner.quizView.timerLabel.text = " "
+                    owner.currentCount = 0
                     owner.showLoseAlert()
                 }
             })
@@ -138,7 +141,7 @@ extension ViewController {
 
         let alert = AlertManager.shared
             .setType(.alert)
-            .setTitle("Game Over")
+            .setTitle("💥 Game Over 💥")
             .setMessage(nil)
             .setActions([confirmAction])
             .apply()

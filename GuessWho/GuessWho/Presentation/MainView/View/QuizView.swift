@@ -11,7 +11,7 @@ class QuizView: UIView {
     private let contentStackView = {
         let stackView = UIStackView()
         stackView.axis = .vertical
-        stackView.spacing = 40
+        stackView.spacing = 30
         stackView.alignment = .fill
         stackView.distribution = .equalSpacing
         stackView.translatesAutoresizingMaskIntoConstraints = false
@@ -56,9 +56,10 @@ class QuizView: UIView {
 
     private(set) var timerLabel: UILabel = {
         let label = UILabel()
-        label.textColor = .white
+        label.text = " "
+        label.textColor = .systemGray
         label.textAlignment = .center
-        label.font = UIFont.systemFont(ofSize: 50)
+        label.font = UIFont.systemFont(ofSize: 40)
 
         return label
     }()
@@ -120,7 +121,8 @@ class QuizView: UIView {
     private func configureConstraints() {
         NSLayoutConstraint.activate([
             contentStackView.centerXAnchor.constraint(equalTo: centerXAnchor),
-            contentStackView.centerYAnchor.constraint(equalTo: centerYAnchor),
+            contentStackView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
+//            contentStackView.centerYAnchor.constraint(equalTo: centerYAnchor),
             personImageView.widthAnchor.constraint(equalTo: safeAreaLayoutGuide.widthAnchor, multiplier: 0.8),
             personImageView.heightAnchor.constraint(equalTo: personImageView.widthAnchor, multiplier: 1.5),
             answerTextField.widthAnchor.constraint(equalTo: safeAreaLayoutGuide.widthAnchor, multiplier: 0.6),
