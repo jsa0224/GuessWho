@@ -24,14 +24,19 @@ class QuizView: UIView {
         stackView.axis = .horizontal
         stackView.spacing = 8
         stackView.alignment = .fill
-        stackView.distribution = .equalSpacing
-        stackView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.distribution = .fill
+        stackView.layoutMargins = UIEdgeInsets(top: 0, left: 12, bottom: 0, right: 0)
+        stackView.isLayoutMarginsRelativeArrangement = true
 
         return stackView
     }()
     
     private let personImageView = {
         let imageView = UIImageView()
+        imageView.layer.borderWidth = 4
+        imageView.layer.borderColor = UIColor.systemGray.cgColor
+        imageView.layer.cornerRadius = 40
+        imageView.clipsToBounds = true
         
         return imageView
     }()
@@ -39,10 +44,12 @@ class QuizView: UIView {
     private(set) var answerTextField: UITextField = {
         let textField = UITextField()
         textField.layer.borderWidth = 2
-        textField.layer.borderColor = UIColor.white.cgColor
+        textField.layer.borderColor = UIColor.systemGray.cgColor
         textField.textAlignment = .center
         textField.textColor = .white
         textField.layer.cornerRadius = 8
+        textField.font = .preferredFont(forTextStyle: .title3)
+        textField.attributedPlaceholder = NSAttributedString(string: "정답", attributes: [.foregroundColor: UIColor.systemGray])
 
         return textField
     }()
@@ -58,7 +65,8 @@ class QuizView: UIView {
 
     private(set) var answerButton: UIButton = {
         let button = UIButton()
-        let image = UIImage(systemName: "checkmark.circle")
+        let imageConfig = UIImage.SymbolConfiguration(pointSize: 30, weight: .light)
+        let image = UIImage(systemName: "checkmark.circle", withConfiguration: imageConfig)
         button.setImage(image, for: .normal)
 
         return button
@@ -67,6 +75,7 @@ class QuizView: UIView {
     private(set) var resetButton = {
         let button = UIButton()
         button.setTitle("reset", for: .normal)
+        button.titleLabel?.font = .preferredFont(forTextStyle: .title2)
         button.backgroundColor = .gray
         button.layer.cornerRadius = 8
         
@@ -88,9 +97,14 @@ class QuizView: UIView {
         configureSubviews()
         configureConstraints()
     }
-
+    
     func configureView(by item: Celebrity) {
-        personImageView.image = UIImage(named: item.name)
+        // 일반 사진
+//        personImageView.image = UIImage(named: item.name)
+        
+        // 흑백 사진
+        guard let image = UIImage(named: item.name) else { return }
+        personImageView.image = convertToGrayScale(image: image)
     }
     
     private func configureSubviews() {
@@ -109,7 +123,29 @@ class QuizView: UIView {
             contentStackView.centerYAnchor.constraint(equalTo: centerYAnchor),
             personImageView.widthAnchor.constraint(equalTo: safeAreaLayoutGuide.widthAnchor, multiplier: 0.8),
             personImageView.heightAnchor.constraint(equalTo: personImageView.widthAnchor, multiplier: 1.5),
-            answerTextField.widthAnchor.constraint(equalTo: safeAreaLayoutGuide.widthAnchor, multiplier: 0.7),
+            answerTextField.widthAnchor.constraint(equalTo: safeAreaLayoutGuide.widthAnchor, multiplier: 0.6),
         ])
+    }
+    
+    private func convertToGrayScale(image: UIImage) -> UIImage? {
+        let imageRect: CGRect = CGRect(x: 0, y: 0, width: image.size.width, height: image.size.height)
+        let colorSpace = CGColorSpaceCreateDeviceGray()
+        let width = image.size.width
+        let height = image.size.height
+        let bitmapInfo = CGBitmapInfo(rawValue: CGImageAlphaInfo.none.rawValue)
+        let context = CGContext(data: nil, width: Int(width), height: Int(height), bitsPerComponent: 8, bytesPerRow: 0, space: colorSpace, bitmapInfo: bitmapInfo.rawValue)
+        
+        if let cgImage = image.cgImage {
+            context?.draw(cgImage, in: imageRect)
+            
+            if let makeImage = context?.makeImage() {
+                let imageRef = makeImage
+                let newImage = UIImage(cgImage: imageRef)
+                
+                return newImage
+            }
+        }
+        
+        return UIImage()
     }
 }

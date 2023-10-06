@@ -28,6 +28,7 @@ class MainView: UIView {
     private(set) var startButton = {
         let button = UIButton()
         button.setTitle("Start", for: .normal)
+        button.titleLabel?.font = .preferredFont(forTextStyle: .title1)
         button.backgroundColor = .gray
         button.layer.cornerRadius = 8
         
