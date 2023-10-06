@@ -11,7 +11,7 @@ class QuizView: UIView {
     private let contentStackView = {
         let stackView = UIStackView()
         stackView.axis = .vertical
-        stackView.spacing = 20
+        stackView.spacing = 40
         stackView.alignment = .fill
         stackView.distribution = .equalSpacing
         stackView.translatesAutoresizingMaskIntoConstraints = false
@@ -24,7 +24,7 @@ class QuizView: UIView {
         stackView.axis = .horizontal
         stackView.spacing = 8
         stackView.alignment = .fill
-        stackView.distribution = .fillEqually
+        stackView.distribution = .equalSpacing
         stackView.translatesAutoresizingMaskIntoConstraints = false
 
         return stackView
@@ -75,10 +75,9 @@ class QuizView: UIView {
     }
     
     private func configure() {
-        backgroundColor = .systemBackground
+        backgroundColor = UIColor(named: "mainColor")
         configureSubviews()
         configureConstraints()
-        backgroundColor = UIColor(named: "mainColor")
     }
 
     func configureView(by item: Celebrity) {
@@ -99,7 +98,8 @@ class QuizView: UIView {
             contentStackView.centerXAnchor.constraint(equalTo: centerXAnchor),
             contentStackView.centerYAnchor.constraint(equalTo: centerYAnchor),
             personImageView.widthAnchor.constraint(equalTo: safeAreaLayoutGuide.widthAnchor, multiplier: 0.8),
-            personImageView.heightAnchor.constraint(equalTo: personImageView.widthAnchor, multiplier: 1.5)
+            personImageView.heightAnchor.constraint(equalTo: personImageView.widthAnchor, multiplier: 1.5),
+            answerTextField.widthAnchor.constraint(equalTo: safeAreaLayoutGuide.widthAnchor, multiplier: 0.7),
         ])
     }
 }

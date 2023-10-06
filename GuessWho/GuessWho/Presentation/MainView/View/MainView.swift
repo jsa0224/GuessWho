@@ -11,7 +11,7 @@ class MainView: UIView {
     private let mainStackView = {
         let stackView = UIStackView()
         stackView.axis = .vertical
-        stackView.spacing = 20
+        stackView.spacing = 40
         stackView.alignment = .fill
         stackView.distribution = .fill
         stackView.translatesAutoresizingMaskIntoConstraints = false
@@ -21,7 +21,7 @@ class MainView: UIView {
 
     private let titleImageView = {
         let imageView = UIImageView()
-        imageView.backgroundColor = .brown
+
         return imageView
     }()
     
@@ -47,11 +47,10 @@ class MainView: UIView {
 
     private func configureImageView() {
         titleImageView.image = UIImage(named: "logo")
-        backgroundColor = UIColor(named: "mainColor")
     }
     
     private func configure() {
-        backgroundColor = .systemBackground
+        backgroundColor = UIColor(named: "mainColor")
         configureSubviews()
         configureConstraints()
     }
@@ -64,12 +63,9 @@ class MainView: UIView {
 
     private func configureConstraints() {
         NSLayoutConstraint.activate([
-            mainStackView.topAnchor.constraint(equalTo: topAnchor, constant: 300),
-            mainStackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10),
-            mainStackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10),
-            mainStackView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -300),
+            mainStackView.centerXAnchor.constraint(equalTo: centerXAnchor),
             mainStackView.centerYAnchor.constraint(equalTo: centerYAnchor),
-            mainStackView.centerXAnchor.constraint(equalTo: centerXAnchor)
+            mainStackView.widthAnchor.constraint(equalTo: safeAreaLayoutGuide.widthAnchor, multiplier: 0.8),
         ])
     }
 }
