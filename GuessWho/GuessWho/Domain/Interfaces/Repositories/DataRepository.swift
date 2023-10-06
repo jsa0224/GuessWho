@@ -9,5 +9,5 @@ import Foundation
 import RxSwift
 
 protocol DataRepository {
-    func fetchGameList(by occupation: Occupation) -> Observable<[Celebrity]>
+    func fetchGame() -> Observable<Celebrity>
 }

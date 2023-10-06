@@ -8,11 +8,20 @@
 import UIKit
 
 class MainView: UIView {
+    private let mainStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .vertical
+        stackView.spacing = 20
+        stackView.alignment = .fill
+        stackView.distribution = .fill
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+
+        return stackView
+    }()
+
     private let titleImageView = {
         let imageView = UIImageView()
         imageView.backgroundColor = .brown
-        imageView.translatesAutoresizingMaskIntoConstraints = false
-        
         return imageView
     }()
     
@@ -20,18 +29,25 @@ class MainView: UIView {
         let button = UIButton()
         button.setTitle("Start", for: .normal)
         button.backgroundColor = .gray
-        button.translatesAutoresizingMaskIntoConstraints = false
+        button.layer.cornerRadius = 8
         
         return button
     }()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
+        translatesAutoresizingMaskIntoConstraints = false
         configure()
+        configureImageView()
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+
+    private func configureImageView() {
+        titleImageView.image = UIImage(named: "logo")
+        backgroundColor = UIColor(named: "mainColor")
     }
     
     private func configure() {
@@ -41,18 +57,19 @@ class MainView: UIView {
     }
     
     private func configureSubviews() {
-        addSubview(titleImageView)
-        addSubview(startButton)
+        addSubview(mainStackView)
+        mainStackView.addArrangedSubview(titleImageView)
+        mainStackView.addArrangedSubview(startButton)
     }
 
     private func configureConstraints() {
         NSLayoutConstraint.activate([
-            titleImageView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 323),
-            titleImageView.centerXAnchor.constraint(equalTo: centerXAnchor),
-            titleImageView.widthAnchor.constraint(equalToConstant: 314),
-            titleImageView.heightAnchor.constraint(equalToConstant: 63),
-            startButton.topAnchor.constraint(equalTo: titleImageView.bottomAnchor, constant: 100),
-            startButton.centerXAnchor.constraint(equalTo: safeAreaLayoutGuide.centerXAnchor)
+            mainStackView.topAnchor.constraint(equalTo: topAnchor, constant: 300),
+            mainStackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10),
+            mainStackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10),
+            mainStackView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -300),
+            mainStackView.centerYAnchor.constraint(equalTo: centerYAnchor),
+            mainStackView.centerXAnchor.constraint(equalTo: centerXAnchor)
         ])
     }
 }

@@ -15,22 +15,16 @@ final class DataManager {
         self.data = data
     }
 
-    func fetchGameList(by occupation: Occupation) -> Observable<[Celebrity]> {
+    func fetchGame() -> Observable<Celebrity> {
         return Observable.create { [weak self] emitter in
-            var result: [Celebrity] = []
-
-            for _ in 1...5 {
-                guard let request = self?.data.celebrities
-                    .filter({ $0.occupation == occupation })
-                else {
-                    emitter.onError(DataError.readFail)
-                    return Disposables.create()
-                }
-
-                result.append(contentsOf: request)
+            guard let request = self?.data.celebrities
+                .randomElement()
+            else {
+                emitter.onError(DataError.readFail)
+                return Disposables.create()
             }
 
-            emitter.onNext(result)
+            emitter.onNext(request)
             emitter.onCompleted()
 
             return Disposables.create()

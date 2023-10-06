@@ -9,7 +9,7 @@ import Foundation
 import RxSwift
 
 protocol GuessWhoUseCase {
-    func fetchGameList(by occupation: Occupation) -> Observable<[Celebrity]>
+    func fetchGame() -> Observable<Celebrity>
 }
 
 final class DefaultGuessWhoUseCase: GuessWhoUseCase {
@@ -19,7 +19,7 @@ final class DefaultGuessWhoUseCase: GuessWhoUseCase {
         self.guessWhoRepository = guessWhoRepository
     }
 
-    func fetchGameList(by occupation: Occupation) -> Observable<[Celebrity]> {
-        return guessWhoRepository.fetchGameList(by: occupation)
+    func fetchGame() -> Observable<Celebrity> {
+        return guessWhoRepository.fetchGame()
     }
 }

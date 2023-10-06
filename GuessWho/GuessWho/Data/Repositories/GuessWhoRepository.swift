@@ -15,9 +15,7 @@ final class GuessWhoRepository: DataRepository {
         self.dataManager = dataManager
     }
 
-    func fetchGameList(by occupation: Occupation) -> Observable<[Celebrity]> {
-        return dataManager.fetchGameList(by: occupation)
+    func fetchGame() -> Observable<Celebrity> {
+        return dataManager.fetchGame()
     }
-
-
 }

@@ -18,30 +18,55 @@ class QuizView: UIView {
         
         return stackView
     }()
+
+    private let answerStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .horizontal
+        stackView.spacing = 8
+        stackView.alignment = .fill
+        stackView.distribution = .fill
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+
+        return stackView
+    }()
     
     private let personImageView = {
         let imageView = UIImageView()
-        imageView.backgroundColor = .brown
         
         return imageView
     }()
     
     private(set) var answerTextField = {
         let textField = UITextField()
-        
+        textField.layer.borderWidth = 2
+        textField.layer.borderColor = UIColor.white.cgColor
+        textField.textAlignment = .center
+        textField.textColor = .white
+        textField.layer.cornerRadius = 8
+
         return textField
+    }()
+
+    private(set) var answerButton = {
+        let button = UIButton()
+        let image = UIImage(systemName: "checkmark.circle")
+        button.setImage(image, for: .normal)
+
+        return button
     }()
     
     private(set) var resetButton = {
         let button = UIButton()
         button.setTitle("reset", for: .normal)
         button.backgroundColor = .gray
+        button.layer.cornerRadius = 8
         
         return button
     }()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
+        translatesAutoresizingMaskIntoConstraints = false
         configure()
     }
     
@@ -53,13 +78,20 @@ class QuizView: UIView {
         backgroundColor = .systemBackground
         configureSubviews()
         configureConstraints()
+        backgroundColor = UIColor(named: "mainColor")
+    }
+
+    func configureView(by item: Celebrity) {
+        personImageView.image = UIImage(named: item.name)
     }
     
     private func configureSubviews() {
         addSubview(contentStackView)
         contentStackView.addArrangedSubview(personImageView)
-        contentStackView.addArrangedSubview(answerTextField)
+        contentStackView.addArrangedSubview(answerStackView)
         contentStackView.addArrangedSubview(resetButton)
+        answerStackView.addArrangedSubview(answerTextField)
+        answerStackView.addArrangedSubview(answerButton)
     }
 
     private func configureConstraints() {
