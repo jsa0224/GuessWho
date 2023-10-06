@@ -14,8 +14,11 @@ class ViewController: UIViewController {
     private let mainView = MainView()
     private let quizView = QuizView()
     private let viewModel: MainViewModel
-    private let disposeBag = DisposeBag()
+    private var disposeBag = DisposeBag()
     private var isCorrectRelay = PublishRelay<Bool>()
+    private var timer: Timer?
+    private var currentCount = 7
+
 
     init(viewModel: MainViewModel) {
         self.viewModel = viewModel
@@ -54,7 +57,14 @@ class ViewController: UIViewController {
             .observe(on: MainScheduler.instance)
             .withUnretained(self)
             .bind(onNext: { owner, game in
+                owner.timer?.invalidate()
                 owner.quizView.configureView(by: game)
+                owner.timer = Timer.scheduledTimer(timeInterval: 1.0,
+                                             target: self,
+                                                   selector: #selector(owner.fireTimer),
+                                             userInfo: nil,
+                                             repeats: true)
+                owner.currentCount = 7
             })
             .disposed(by: disposeBag)
 
@@ -68,13 +78,14 @@ class ViewController: UIViewController {
             .withUnretained(self)
             .debug()
             .bind(onNext: { owner, bool in
-                if bool {
-                    // TODO: 다음 게임으로 넘어감
+                guard let isValid = owner.timer?.isValid else { return }
+                if bool && isValid {
                     owner.quizView.answerTextField.text = nil
+                    owner.currentCount = 7
                     owner.isCorrectRelay.accept(true)
                 } else {
-                    // TODO: 얼럿
                     owner.quizView.answerTextField.text = nil
+                    owner.currentCount = 7
                     owner.showLoseAlert()
                 }
             })
@@ -133,6 +144,20 @@ extension ViewController {
             .apply()
 
         self.present(alert, animated: true)
+    }
+
+    @objc func fireTimer() {
+        quizView.timerLabel.text = "\(currentCount)"
+        currentCount -= 1
+
+//        if currentCount == 3 {
+//            quizView.timerLabel.textColor = .systemRed
+//        }
+
+        if currentCount == -1 {
+            timer?.invalidate()
+            currentCount = 7
+        }
     }
 }
 

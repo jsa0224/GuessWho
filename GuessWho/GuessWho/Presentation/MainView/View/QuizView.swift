@@ -47,6 +47,15 @@ class QuizView: UIView {
         return textField
     }()
 
+    private(set) var timerLabel: UILabel = {
+        let label = UILabel()
+        label.textColor = .white
+        label.textAlignment = .center
+        label.font = UIFont.systemFont(ofSize: 50)
+
+        return label
+    }()
+
     private(set) var answerButton: UIButton = {
         let button = UIButton()
         let image = UIImage(systemName: "checkmark.circle")
@@ -86,6 +95,7 @@ class QuizView: UIView {
     
     private func configureSubviews() {
         addSubview(contentStackView)
+        contentStackView.addArrangedSubview(timerLabel)
         contentStackView.addArrangedSubview(personImageView)
         contentStackView.addArrangedSubview(answerStackView)
         contentStackView.addArrangedSubview(resetButton)
