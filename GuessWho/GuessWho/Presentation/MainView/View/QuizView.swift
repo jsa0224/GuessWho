@@ -24,7 +24,7 @@ class QuizView: UIView {
         stackView.axis = .horizontal
         stackView.spacing = 8
         stackView.alignment = .fill
-        stackView.distribution = .fill
+        stackView.distribution = .fillEqually
         stackView.translatesAutoresizingMaskIntoConstraints = false
 
         return stackView
@@ -36,7 +36,7 @@ class QuizView: UIView {
         return imageView
     }()
     
-    private(set) var answerTextField = {
+    private(set) var answerTextField: UITextField = {
         let textField = UITextField()
         textField.layer.borderWidth = 2
         textField.layer.borderColor = UIColor.white.cgColor
@@ -47,7 +47,7 @@ class QuizView: UIView {
         return textField
     }()
 
-    private(set) var answerButton = {
+    private(set) var answerButton: UIButton = {
         let button = UIButton()
         let image = UIImage(systemName: "checkmark.circle")
         button.setImage(image, for: .normal)

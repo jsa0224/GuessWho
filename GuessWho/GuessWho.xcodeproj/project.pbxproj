@@ -13,7 +13,6 @@
 		78793A562ACEC3C600B80163 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 78793A552ACEC3C600B80163 /* Assets.xcassets */; };
 		78793A592ACEC3C600B80163 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 78793A572ACEC3C600B80163 /* LaunchScreen.storyboard */; };
 		78793A612ACEE84C00B80163 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78793A602ACEE84C00B80163 /* MainView.swift */; };
-		78793A632ACEEA3A00B80163 /* CategoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78793A622ACEEA3A00B80163 /* CategoryView.swift */; };
 		78793A652ACEEEDC00B80163 /* QuizView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78793A642ACEEEDC00B80163 /* QuizView.swift */; };
 		AE57591F2ACEDE6300E8EF51 /* Celebrity.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE57591E2ACEDE6300E8EF51 /* Celebrity.swift */; };
 		AED6820A2ACEE10200898386 /* GuessWhoUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = AED682092ACEE10200898386 /* GuessWhoUseCase.swift */; };
@@ -40,7 +39,6 @@
 		78793A582ACEC3C600B80163 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		78793A5A2ACEC3C600B80163 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		78793A602ACEE84C00B80163 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
-		78793A622ACEEA3A00B80163 /* CategoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryView.swift; sourceTree = "<group>"; };
 		78793A642ACEEEDC00B80163 /* QuizView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizView.swift; sourceTree = "<group>"; };
 		AE57591E2ACEDE6300E8EF51 /* Celebrity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Celebrity.swift; sourceTree = "<group>"; };
 		AED682092ACEE10200898386 /* GuessWhoUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuessWhoUseCase.swift; sourceTree = "<group>"; };
@@ -207,7 +205,6 @@
 			isa = PBXGroup;
 			children = (
 				78793A642ACEEEDC00B80163 /* QuizView.swift */,
-				78793A622ACEEA3A00B80163 /* CategoryView.swift */,
 				78793A602ACEE84C00B80163 /* MainView.swift */,
 			);
 			path = View;
@@ -355,7 +352,6 @@
 				AED682192ACEE60800898386 /* GuessWhoRepository.swift in Sources */,
 				AED682162ACEE57D00898386 /* DataError.swift in Sources */,
 				78793A4F2ACEC3C200B80163 /* SceneDelegate.swift in Sources */,
-				78793A632ACEEA3A00B80163 /* CategoryView.swift in Sources */,
 				AED682402ACF2AF500898386 /* Reactive.swift in Sources */,
 				78793A652ACEEEDC00B80163 /* QuizView.swift in Sources */,
 				AED6820D2ACEE18D00898386 /* CelebrityData.swift in Sources */,

@@ -12,11 +12,10 @@ import RxRelay
 
 class ViewController: UIViewController {
     private let mainView = MainView()
-//    private let categoryView = CategoryView()
     private let quizView = QuizView()
     private let viewModel: MainViewModel
     private let disposeBag = DisposeBag()
-    private var isCorrect = PublishRelay<Bool>()
+    private var isCorrectRelay = PublishRelay<Bool>()
 
     init(viewModel: MainViewModel) {
         self.viewModel = viewModel
@@ -35,21 +34,17 @@ class ViewController: UIViewController {
     
     private func bind() {
         let didTapStartButton = mainView.startButton.rx.tap.asObservable()
-        let didEndTexting = quizView.answerButton.rx.tap
-            .withUnretained(self)
-            .withLatestFrom(
-                quizView.answerTextField.rx.text
-                    .orEmpty
-            )
-            .map { $0 }
+        let didTapAnswerButton = quizView.answerButton.rx.tap.asObservable()
+        let didTextingAnswerText = quizView.answerTextField.rx.text.orEmpty.asObservable()
 
-        let passNextGame = isCorrect
+        let passNextGame = isCorrectRelay
             .map { _ in }
 
         let didTapResetButton = quizView.resetButton.rx.tap.asObservable()
 
         let input = MainViewModel.Input(didTapStartButton: didTapStartButton,
-                                        didEndTexting: didEndTexting,
+                                        didTapAnswerButton: didTapAnswerButton,
+                                        didTextingAnswerText: didTextingAnswerText,
                                         passNextGame: passNextGame,
                                         didTapResetButton: didTapResetButton)
         let output = viewModel.transform(input)
@@ -64,14 +59,22 @@ class ViewController: UIViewController {
             .disposed(by: disposeBag)
 
         output
+            .answerSaving
+            .subscribe()
+            .disposed(by: disposeBag)
+
+        output
             .isCorrect
             .withUnretained(self)
+            .debug()
             .bind(onNext: { owner, bool in
                 if bool {
                     // TODO: 다음 게임으로 넘어감
-                    owner.isCorrect.accept(true)
+                    owner.quizView.answerTextField.text = nil
+                    owner.isCorrectRelay.accept(true)
                 } else {
                     // TODO: 얼럿
+                    owner.quizView.answerTextField.text = nil
                     owner.showLoseAlert()
                 }
             })
@@ -116,27 +119,21 @@ extension ViewController {
         contentView.removeFromSuperview()
     }
 
-    func showLoseAlert() -> Observable<AlertActionType> {
-        return Observable.create { [weak self] emitter in
-            let confirmAction = UIAlertAction(title: "확인",
-                                              style: .default) { _ in
-                emitter.onNext(.ok)
-                emitter.onCompleted()
-            }
-
-            let alert = AlertManager.shared
-                .setType(.alert)
-                .setTitle("Game Over")
-                .setMessage(nil)
-                .setActions([confirmAction])
-                .apply()
-
-            self?.navigationController?.present(alert, animated: true)
-
-            return Disposables.create {
-                alert.dismiss(animated: true)
-            }
+    func showLoseAlert() {
+        let confirmAction = UIAlertAction(title: "확인",
+                                          style: .default) { _ in
+            self.dismiss(animated: true)
         }
+
+        let alert = AlertManager.shared
+            .setType(.alert)
+            .setTitle("Game Over")
+            .setMessage(nil)
+            .setActions([confirmAction])
+            .apply()
+
+        self.present(alert, animated: true)
     }
 }
+
 

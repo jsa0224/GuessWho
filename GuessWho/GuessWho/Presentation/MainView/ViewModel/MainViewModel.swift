@@ -11,17 +11,20 @@ import RxSwift
 final class MainViewModel {
     struct Input {
         let didTapStartButton: Observable<Void>
-        let didEndTexting: Observable<String>
+        let didTapAnswerButton: Observable<Void>
+        let didTextingAnswerText: Observable<String>
         let passNextGame: Observable<Void>
         let didTapResetButton: Observable<Void>
     }
 
     struct Output {
         let game: Observable<Celebrity>
+        let answerSaving: Observable<Void>
         let isCorrect: Observable<Bool>
     }
 
     private let guessWhoUseCase: GuessWhoUseCase
+    private var answerText: String = ""
 
     init(guessWhoUseCase: GuessWhoUseCase) {
         self.guessWhoUseCase = guessWhoUseCase
@@ -29,22 +32,31 @@ final class MainViewModel {
 
     func transform(_ input: Input) -> Output {
         let game = Observable.merge(input.didTapStartButton,
-                                    input.passNextGame)
+                                    input.passNextGame,
+                                    input.didTapResetButton)
             .withUnretained(self)
             .flatMap { owner, occupation in
                 owner
                     .guessWhoUseCase
                     .fetchGame()
             }
+            .share()
 
-        let isCorrect = input.didEndTexting
+        let answerSaving = input.didTextingAnswerText
             .withUnretained(self)
-            .flatMap { owner, name in
-                game.map { $0.name == name } // 이름이 맞으면 통과 / 아니면 아니라는 얼럿
+            .map { owner, name in
+                owner.answerText = name
             }
 
+        let isCorrect = input.didTapAnswerButton
+            .withLatestFrom(game)
+            .withUnretained(self)
+            .map { owner, game in
+                game.name == owner.answerText
+            }
 
         return Output(game: game,
+                      answerSaving: answerSaving,
                       isCorrect: isCorrect)
     }
 }
